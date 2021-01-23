@@ -4,7 +4,14 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          <link
+            rel="preload"
+            href="/fonts/Lazer84.ttf"
+            as="font"
+            crossOrigin=""
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />

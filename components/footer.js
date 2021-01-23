@@ -5,7 +5,10 @@ export default function Footer() {
   const date = new Date();
   const year = date.getFullYear();
   return (
-    <footer className="border-t bg-accent-1 border-accent-2">
+    <footer
+      style={{ backgroundColor: "#191919" }}
+      className="border-t bg-accent-7 border-accent-7"
+    >
       <Container>
         <div className="grid items-center content-center py-5 justify-items-center">
           <h3 className="text-xl font-bold leading-tight tracking-tighter text-center lg:text-5xl lg:text-left lg:mb-0 lg:pr-4 lg:w-1/2">

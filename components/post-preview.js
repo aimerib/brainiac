@@ -3,7 +3,10 @@ import Link from "next/link";
 
 export default function PostPreview({ title, date, excerpt, author, slug }) {
   return (
-    <div>
+    <div
+      style={{ backgroundColor: "rgba(25, 25, 25, .8)" }}
+      className="pt-10 pb-10 pl-16 pr-10"
+    >
       <div className="mb-5"></div>
       <h3 className="mb-3 text-3xl leading-snug">
         <Link as={`/posts/${slug}`} href="/posts/[slug]">

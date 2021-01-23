@@ -18,7 +18,7 @@ export default function Post({ post, allPosts }) {
   return (
     <Layout allPosts={allPosts}>
       <Container>
-        <Header />
+        {/* <Header /> */}
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
