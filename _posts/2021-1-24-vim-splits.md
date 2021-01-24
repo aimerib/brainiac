@@ -1,10 +1,10 @@
 ---
 title: Vim Splits
-date: 2021-01-24T18:03:54.368Z
+date: '2021-01-24T21:50:56.263Z'
 tags:
-- vim
 - zettelkasten
 - zettel
+- vim
 ---
 Faster and More Naturally 
 
