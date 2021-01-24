@@ -1,29 +1,32 @@
 ---
 title: Rust NIFs in Elixir
-date: '2021-01-24T22:00:07.989Z'
+date: '2021-01-24T22:30:20.479Z'
 tags:
 - zettelkasten
 - zettel
 ---
-https://hambly.dev/rust-nifs-in-elixir
+[originally from](https://hambly.dev/rust-nifs-in-elixir)
 
-Rust NIFs in Elixir
-03 March 2020 ⏱️ 15 min read
-
-Rustler - Native Implemented Functions (NIFs) in Rust from Elixir
-Image of the word Rustler covered in rust
 Elixir is a dynamic, strongly typed, functional programming language that runs on the Erlang virtual machine - the BEAM. It inherits that distributed and fault-tolerant architecture, while adding a Ruby-like syntax, modern build tool and package manager Mix, and a built-in testing framework. It really sparks joy every time I get to use it!
+
 Given its trade-offs for scalability and managed memory, when you require better CPU and memory performance it’s necessary to reach for Native Implemented Functions. NIFs allow you to call functions from compiled, shared libraries directly in your Elixir/Erlang code. However, a native function that crashes or misbehaves can crash the whole VM or cause scheduling and memory consumption issues.
 Rustler is a library for writing NIFs in Rust, giving us better safety from undefined behavior, out-of-bounds access, use-after-free bugs, null pointer dereferences, and data races. All of which can have disasterous consequences on the Erlang VM.
+
 Discord wrote a great article where they used Rust NIFs to scale their Elixir service. They created a sorted “Member List” data structure that’s very fast to process mutations in the list, and returns the indices where items in the list are mutated. They released that work as an open source library called Discord.SortedSet.
+
 There are some brilliant quality of life improvements landing in Rustler 0.22, so let’s learn how to use Rustler to create a NIF module in Elixir!
-Rustler by example
-This source code is available at delta1/rustler-demo-app.
+
 Start off by installing Elixir and Rust.
 Open a terminal and your favorite text editor or IDE.
 Create a new Mix application
+
+```elixir
 mix new my_app && cd my_app
+```
+
 Edit mix.exs to add Rustler as a dependency.
+
+```elixir
 # mix.exs
 defp deps do
   [
@@ -31,22 +34,37 @@ defp deps do
       ref: "e343b8ca", sparse: "rustler_mix"}
   ]
 end
+```
+
 Here we are importing the dependency directly from GitHub, to get the latest changes coming in the next version of Rustler! The ref key is the git commit hash, and sparse indicates that the Elixir dependency is in a specific folder of the repository.
 Install the dependency
+
+```elixir
 mix deps.get
+```
+
 Create a new NIF using Rustler - use MyNif as the module name, and mynif for the Rust crate name
+
+```elixir
 mix rustler.new
+```
 
 This is the name of the Elixir module the NIF module will be registered to.
 Module name > MyNif
 This is the name used for the generated Rust crate. The default is most likely fine.
+
+```
 Library name (mynif) >
 * creating native/mynif/.cargo/config
 * creating native/mynif/README.md
 * creating native/mynif/Cargo.toml
 * creating native/mynif/src/lib.rs
+```
+
 Ready to go! See my_app/native/mynif/README.md for further instructions.
 Follow the instructions in the readme to update mix.exs by adding :rustler to the project compilers, and mynif to the rustler crates
+
+```elixir
 # mix.exs
 def project do
   [
@@ -55,6 +73,8 @@ def project do
     rustler_crates: [mynif: []]
   ]
 end
+```
+
 Now update the Rustler dependency in native/mynif/Cargo.toml, using the rev key to specify the same git revision
 # Cargo.toml
 [dependencies]
