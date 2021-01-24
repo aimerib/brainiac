@@ -2,13 +2,20 @@ import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Container from "../../components/container";
 import PostBody from "../../components/post-body";
-import Header from "../../components/header";
 import PostHeader from "../../components/post-header";
 import Layout from "../../components/layout";
 import { getPostBySlug, getAllPosts } from "../../lib/api";
 import PostTitle from "../../components/post-title";
 import Head from "next/head";
 import markdownToHtml from "../../lib/markdownToHtml";
+import styled from "styled-components";
+
+const PostContent = styled.div`
+  background-color: rgba(25, 25, 25, 0.6);
+  padding-bottom: 2.8rem;
+  color: yellow;
+  text-shadow: 0 0 2px #ffea02, 0 0 7px #ffea02;
+`;
 
 export default function Post({ post, allPosts }) {
   const router = useRouter();
@@ -23,16 +30,18 @@ export default function Post({ post, allPosts }) {
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
-            <article className="mb-32">
+            <article className="mb-16">
               <Head>
                 <title>{post.title}</title>
               </Head>
-              <PostHeader
-                title={post.title}
-                date={post.date}
-                author={post.author}
-              />
-              <PostBody content={post.content} />
+              <PostContent>
+                <PostHeader
+                  title={post.title}
+                  date={post.date}
+                  author={post.author}
+                />
+                <PostBody content={post.content} />
+              </PostContent>
             </article>
           </>
         )}

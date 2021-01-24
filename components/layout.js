@@ -1,13 +1,14 @@
 import Footer from "../components/footer";
 import Meta from "../components/meta";
 import Menu from "../components/menu";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { useState } from "react";
 
 const Background = styled.div`
   background-image: url("/assets/background.jpg");
   filter: blur(10px);
-  height: 105vh;
-  width: 105vw;
+  height: 110vh;
+  width: 110vw;
   transform: translateX(-20px);
   background-position: center;
   background-repeat: no-repeat;
@@ -15,30 +16,35 @@ const Background = styled.div`
   background-size: cover;
   overflow: auto;
 `;
+
 const Content = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
-  /* z-index: 100; */
   position: relative;
-  /* top: 40%;
-  left: 30%; */
+  min-height: 100vh;
 `;
 
 export default function Layout({ allPosts, children }) {
+  const [footerHeight, setFooterHeight] = useState(0);
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const offset = footerHeight + headerHeight;
+  const contentHeight = css`
+    min-height: calc(100vh - ${offset + 80}px);
+  `;
+
   return (
-    <main
-      // classNames="h-screen"
-      style={{ color: "#ffea02" }}
-    >
+    <main style={{ color: "#ffea02" }}>
       <Background />
       <Content>
-        <Menu posts={allPosts} />
+        <Menu
+          posts={allPosts}
+          returnHeight={(height) => setHeaderHeight(height)}
+        />
         <Meta />
-        <div className="min-h-screen" style={{}}>
+        <div css={contentHeight}>
           <main>{children}</main>
         </div>
-        <Footer />
+        <Footer returnHeight={(height) => setFooterHeight(height)} />
       </Content>
-      {/* <Background /> */}
     </main>
   );
 }

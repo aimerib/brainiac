@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import Header from "../components/header";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import Close from "../public/assets/close.svg";
 
 const ArticlesList = styled.div`
   z-index: 100;
@@ -9,30 +10,68 @@ const ArticlesList = styled.div`
   top: 0px;
 `;
 
-export default function Menu({ posts }) {
+const linkStyle = css`
+  padding-bottom: 10px;
+  padding-left: 2rem;
+  color: yellow;
+  text-shadow: 0 0 10px #ffea02, 0 0 20px #ffea02, 0 0 50px #ffea02;
+  line-height: 2em;
+`;
+
+const menuHeader = css`
+  grid-template-columns: 1fr 1fr 1fr;
+  display: grid;
+  grid-auto-flow: column;
+  line-height: 4em;
+  color: #fff;
+  font-family: Lazer84;
+  text-align: center;
+  text-shadow: 0 0 2px #ff1177, 0 0 16px #ff1177, 0 0 20px #ff1177,
+    0 0 25px #ff1177, 0 0 33px #ff1177;
+`;
+
+export default function Menu({ posts, returnHeight }) {
   const [display, toggleDisplay] = useState(false);
   return (
     <ArticlesList>
       <div
-        className={`grid grid-flow-col fixed h-screen z-50`}
-        style={{ gridTemplateColumns: "auto 1fr" }}
+        className={`${
+          !display ? "-translate-x-full" : "-translate-x-9"
+        } transform-gpu duration-500 transition-transform  fixed grid grid-flow-column`}
+        style={{}}
       >
         <ul
-          style={{ backgroundColor: "#191919 " }}
-          className={`${
-            !display ? "scale-x-0 hidden" : ""
-          } transform-gpu duration-500 transition-transform p-8`}
+          style={{ backgroundColor: "rgba(25, 25, 25, .98)" }}
+          className={`h-screen z-50 max-w-2xl p-8 `}
         >
-          <h1
-            style={{ color: "#ffea02" }}
-            className="pb-5 text-4xl font-bold text-center"
-          >
-            Articles
+          <h1 css={menuHeader} className="text-4xl font-bold text-center">
+            <p
+              css={`
+                justify-self: center;
+                grid-column-start: 2;
+                grid-column-end: 3;
+              `}
+            >
+              Articles
+            </p>
+            <i
+              onClick={() => toggleDisplay(!display)}
+              css={css`
+                justify-self: end;
+                display: inline-block;
+                max-width: 20%;
+                cursor: pointer;
+                grid-column-start: 3;
+                grid-column-end: 4;
+              `}
+            >
+              <Close />
+            </i>
           </h1>
           {posts.map((post, key) => (
             <li
               key={key}
-              style={{ color: "#f52653" }}
+              css={linkStyle}
               className="font-semibold hover:underline"
             >
               <Link as={`/posts/${post.slug}`} href="/posts/[slug]">
@@ -41,12 +80,11 @@ export default function Menu({ posts }) {
             </li>
           ))}
         </ul>
-
-        <div onClick={() => toggleDisplay(!display)}>
-          {!display ? "Show Menu" : "Hide Menu"}
-        </div>
       </div>
-      <Header />
+      <Header
+        toggleMenu={() => toggleDisplay(!display)}
+        returnHeight={returnHeight}
+      />
     </ArticlesList>
   );
 }
