@@ -13,7 +13,7 @@ import styled from "styled-components";
 const PostContent = styled.div`
   background-color: rgba(25, 25, 25, 0.6);
   padding-bottom: 2.8rem;
-  color: yellow;
+  color: white;
   text-shadow: 0 0 2px #ffea02, 0 0 7px #ffea02;
 `;
 

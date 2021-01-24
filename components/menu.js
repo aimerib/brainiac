@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../components/header";
 import styled, { css } from "styled-components";
 import Close from "../public/assets/close.svg";
@@ -13,7 +13,7 @@ const ArticlesList = styled.div`
 const linkStyle = css`
   padding-bottom: 10px;
   padding-left: 2rem;
-  color: yellow;
+  color: white;
   text-shadow: 0 0 10px #ffea02, 0 0 20px #ffea02, 0 0 50px #ffea02;
   line-height: 2em;
 `;
@@ -32,20 +32,38 @@ const menuHeader = css`
 
 export default function Menu({ posts, returnHeight }) {
   const [display, toggleDisplay] = useState(false);
+
+  useEffect(() => {
+    if (display == false)
+      setTimeout(() => {
+        document.getElementById("menu").scrollTop = 0;
+      }, 300);
+  }, [display]);
+
   return (
     <ArticlesList>
       <div
         className={`${
           !display ? "-translate-x-full" : "-translate-x-9"
         } transform-gpu duration-500 transition-transform  fixed grid grid-flow-column`}
-        style={{}}
+        style={{ top: "0" }}
       >
         <ul
-          style={{ backgroundColor: "rgba(25, 25, 25, .98)" }}
+          id="menu"
+          css={css`
+            background-color: rgba(25, 25, 25, 0.98);
+            &::-webkit-scrollbar {
+              display: none;
+            }
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+            overflow-y: scroll;
+          `}
           className={`h-screen z-50 max-w-2xl p-8 `}
         >
           <h1 css={menuHeader} className="text-4xl font-bold text-center">
             <p
+              id="heading"
               css={`
                 justify-self: center;
                 grid-column-start: 2;
@@ -68,17 +86,18 @@ export default function Menu({ posts, returnHeight }) {
               <Close />
             </i>
           </h1>
-          {posts.map((post, key) => (
-            <li
-              key={key}
-              css={linkStyle}
-              className="font-semibold hover:underline"
-            >
-              <Link as={`/posts/${post.slug}`} href="/posts/[slug]">
-                <a onClick={() => toggleDisplay(!display)}>{post.title}</a>
-              </Link>
-            </li>
-          ))}
+          {posts &&
+            posts.map((post, key) => (
+              <li
+                key={key}
+                css={linkStyle}
+                className="font-semibold hover:underline"
+              >
+                <Link as={`/posts/${post.slug}`} href="/posts/[slug]">
+                  <a onClick={() => toggleDisplay(!display)}>{post.title}</a>
+                </Link>
+              </li>
+            ))}
         </ul>
       </div>
       <Header
