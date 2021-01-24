@@ -1,12 +1,12 @@
 ---
 title: Use Raspberry Pi 4 USB-C data connection to connect with iPad Pro
-date: '2021-01-24T22:00:25.095Z'
+date: '2021-01-24T22:57:59.365Z'
 tags:
 - ipad
-- raspberry pi
+- rpi
 - zettel
 - zettelkasten
-- rpi
+- raspberry pi
 ---
 ## Turn on SSH and VNC
 
