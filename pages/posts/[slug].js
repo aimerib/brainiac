@@ -25,12 +25,11 @@ export default function Post({ post, allPosts }) {
   return (
     <Layout allPosts={allPosts}>
       <Container>
-        {/* <Header /> */}
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
-            <article className="mb-16">
+            <article className="mt-20 mb-16">
               <Head>
                 <title>{post.title}</title>
               </Head>
