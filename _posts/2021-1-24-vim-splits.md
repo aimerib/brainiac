@@ -1,6 +1,6 @@
 ---
 title: Vim Splits
-date: 2021-1-24 12:45
+date: 2021-01-24T18:03:54.368Z
 tags:
 - vim
 - zettelkasten
