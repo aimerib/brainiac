@@ -13,9 +13,54 @@ const ArticlesList = styled.div`
 const linkStyle = css`
   padding-bottom: 10px;
   padding-left: 2rem;
-  color: white;
-  text-shadow: 0 0 10px #ffea02, 0 0 20px #ffea02, 0 0 50px #ffea02;
   line-height: 2em;
+
+  a {
+    text-shadow: 0 0 2px #22b1ff, 0 0 16px #22b1ff, 0 0 20px #22b1ff,
+      0 0 25px #22b1ff, 0 0 33px #22b1ff;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    color: white;
+  }
+  a:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    bottom: -4px;
+    left: 0;
+    background: #ff1177;
+    visibility: hidden;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: 0.25s linear;
+    box-shadow: 0 0 10px 2px #ff1177;
+  }
+  a:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 7px;
+    border: 1px solid #fff;
+    bottom: -2px;
+    left: 0;
+    background: #fff;
+    border-radius: 5px;
+    opacity: 0;
+    transform: scalex(0);
+    transition: 0.5s;
+  }
+  &:hover > a:after {
+    opacity: 0.15;
+    transform: scalex(1);
+  }
+  a:hover:before,
+  a:focus:before {
+    visibility: visible;
+    transform: scaleX(1);
+  }
 `;
 
 const menuHeader = css`

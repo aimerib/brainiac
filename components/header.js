@@ -3,16 +3,51 @@ import { css } from "styled-components";
 import { useState, useCallback, useEffect } from "react";
 import Brain from "../public/assets/brain.svg";
 const TitleWrapper = css`
-  &:hover:after {
-    content: "";
-    display: block;
-    margin: 0 auto;
-    margin-top: -3px;
-    width: 50%;
-    border-bottom-width: 3px;
-    border-bottom-style: solid;
-    border-bottom-color: rgba(255, 56, 119, 1);
+  span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    color: white;
   }
+  span:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    bottom: -4px;
+    left: 0;
+    background: #22b1ff;
+    visibility: hidden;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: 0.25s linear;
+    box-shadow: 0 0 10px 2px #22b1ff;
+  }
+  span:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 7px;
+    border: 1px solid #fff;
+    bottom: -2px;
+    left: 0;
+    background: #fff;
+    border-radius: 5px;
+    opacity: 0;
+    transform: scalex(0);
+    transition: 0.5s;
+  }
+  &:hover > span:after {
+    opacity: 0.15;
+    transform: scalex(1);
+  }
+  span:hover:before,
+  span:focus:before {
+    visibility: visible;
+    transform: scaleX(1);
+  }
+
   cursor: pointer;
   align-self: center;
   color: #fff;
@@ -69,7 +104,7 @@ export default function Header({ returnHeight, toggleMenu }) {
             leading-tight tracking-tighter text-center md:text-6xl \
             md:leading-none col-start-2 lg:col-end-3 col-end-5"
           >
-            B r a i n i a c
+            <span>B r a i n i a c</span>
           </div>
         </Link>
       </div>
