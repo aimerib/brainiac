@@ -14,7 +14,7 @@ const linkStyle = css`
   padding-bottom: 10px;
   padding-left: 2rem;
   line-height: 2em;
-  display: inline-block;
+  display: table;
 
   a {
     text-shadow: 0 0 2px #22b1ff, 0 0 16px #22b1ff, 0 0 20px #22b1ff,
@@ -44,10 +44,8 @@ const linkStyle = css`
     position: absolute;
     width: 100%;
     height: 7px;
-    border: 1px solid #fff;
     bottom: -2px;
     left: 0;
-    background: #fff;
     border-radius: 5px;
     opacity: 0;
     transform: scalex(0);
@@ -134,11 +132,7 @@ export default function Menu({ posts, returnHeight }) {
           </h1>
           {posts &&
             posts.map((post, key) => (
-              <li
-                key={key}
-                css={linkStyle}
-                className="font-semibold hover:underline"
-              >
+              <li key={key} css={linkStyle} className="font-semibold">
                 <Link as={`/posts/${post.slug}`} href="/posts/[slug]">
                   <a onClick={() => toggleDisplay(!display)}>{post.title}</a>
                 </Link>

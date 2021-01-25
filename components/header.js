@@ -3,6 +3,7 @@ import { css } from "styled-components";
 import { useState, useCallback, useEffect } from "react";
 import Brain from "../public/assets/brain.svg";
 const TitleWrapper = css`
+  cursor: default;
   span {
     cursor: pointer;
     display: inline-block;
@@ -29,10 +30,8 @@ const TitleWrapper = css`
     position: absolute;
     width: 100%;
     height: 7px;
-    border: 1px solid #fff;
     bottom: -2px;
     left: 0;
-    background: #fff;
     border-radius: 5px;
     opacity: 0;
     transform: scalex(0);
@@ -48,7 +47,6 @@ const TitleWrapper = css`
     transform: scaleX(1);
   }
 
-  cursor: pointer;
   align-self: center;
   color: #fff;
   font-family: Lazer84;
@@ -96,17 +94,17 @@ export default function Header({ returnHeight, toggleMenu }) {
           <Brain />
         </div>
 
-        <Link href="/">
-          <div
-            ref={measuredRef}
-            css={TitleWrapper}
-            className="pt-5 pb-6 pl-8 text-lg md:text-4xl font-bold \
+        <div
+          ref={measuredRef}
+          css={TitleWrapper}
+          className="pt-5 pb-6 pl-8 text-lg md:text-4xl font-bold \
             leading-tight tracking-tighter text-center md:text-6xl \
             md:leading-none col-start-2 lg:col-end-3 col-end-5"
-          >
+        >
+          <Link href="/">
             <span>B r a i n i a c</span>
-          </div>
-        </Link>
+          </Link>
+        </div>
       </div>
     </>
   );
