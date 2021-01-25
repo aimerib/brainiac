@@ -91,7 +91,7 @@ export default function Menu({ posts, returnHeight }) {
         className={`${
           !display ? "-translate-x-full" : "-translate-x-9"
         } transform-gpu duration-500 transition-transform  fixed grid grid-flow-column`}
-        style={{ top: "0" }}
+        style={{ top: "0", zIndex: "999" }}
       >
         <ul
           id="menu"
