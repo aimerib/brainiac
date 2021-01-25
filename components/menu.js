@@ -14,6 +14,7 @@ const linkStyle = css`
   padding-bottom: 10px;
   padding-left: 2rem;
   line-height: 2em;
+  display: inline-block;
 
   a {
     text-shadow: 0 0 2px #22b1ff, 0 0 16px #22b1ff, 0 0 20px #22b1ff,
