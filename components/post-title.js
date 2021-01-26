@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const TitleWrapper = styled.h1.attrs(() => ({
   className:
-    "text-lg md:text-4xl p-12 md:text-2xl lg:text-3xl font-bold mb-14 mt-14 text-center",
+    "text-lg md:text-4xl p-12 md:text-2xl lg:text-3xl font-bold mb-8 mt-14 text-center",
 }))`
   background-color: rgba(25, 25, 25, 0.7);
   text-align: center;

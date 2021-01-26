@@ -9,7 +9,6 @@ import PostTitle from "../../components/post-title";
 import Head from "next/head";
 import markdownToHtml from "../../lib/markdownToHtml";
 import styled from "styled-components";
-
 const PostContent = styled.div`
   background-color: rgba(25, 25, 25, 0.6);
   padding-bottom: 2.8rem;
@@ -38,7 +37,9 @@ export default function Post({ post, allPosts }) {
                   title={post.title}
                   date={post.date}
                   author={post.author}
+                  tags={post.tags}
                 />
+
                 <PostBody content={post.content} />
               </PostContent>
             </article>
